@@ -4,6 +4,18 @@ import connectDB from "./db/index.js";
 
 
 connectDB()
+.then(() => {
+    app.on("error", (error) => {
+        console.log("ERROR : ",error)
+        throw error
+    })
+    app.listen(process.env.PORT || 8000, () => {
+        console.log(`Server is listening at port : ${process.env.PORT}`)
+    })
+})
+.catch((error) => {
+    console.error("MongoDB connection error:", error);
+})
 
 
 
